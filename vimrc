@@ -150,7 +150,7 @@ filetype on
 set t_Co=256
 
 "设置VIM颜色主题 你可以借助插件scrollcolor.vim和color_sample_pack.vim来选择你喜爱的主题(150多个)(请参考下面插件)
-colorscheme pablo
+"colorscheme pablo
 
 "预览窗口,eg. ctr+w { 时的窗口大小
 set previewheight=20
@@ -246,7 +246,7 @@ set scrolloff=2
 
 "自动读写相关
 set autoread              " read open files again when changed outside Vim ( 同步 )
-set autowrite             " write a modified buffer on each :next , ... ( 跳到另一个文件时,自动保存上个文件 )
+"set autowrite             " write a modified buffer on each :next , ... ( 跳到另一个文件时,自动保存上个文件 )
 set modified
 
 "设置VIM行号
@@ -635,6 +635,25 @@ nmap <C-_>i :cs find i <C-R>=expand("<cfile>")<CR><CR> :copen<CR><CR>
 " lingd@ubuntu:~/arm/linux-2.6.28.7$ cscope -Rbq
 
 " Set cscope "}}}
+
+" color settings "{{{
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+let g:solarized_termcolors=256 "16
+let g:solarized_termtrans = 0 "1
+let g:solarized_degrade = 1 "0
+let g:solarized_bold =  1 "0
+let g:solarized_underline = 1 " 0
+let g:solarized_italic = 1 " 0
+let g:solarized_contrast = "normal"
+"high" or ""low" 
+let g:solarized_visibility= "normal"
+"high" or ""low"
+colorscheme solarized
+" color settings "}}}
 
 "----------------------
 "利用 插件 丰富 功能
