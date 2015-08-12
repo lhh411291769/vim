@@ -8,7 +8,7 @@ autocmd!
 :mapclear
 map <unique> <silent> <F2> <ESC>:BufExplorer<CR>
 map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
-map <unique> <silent> <F4> <ESC>:TagbarToggle<CR>
+"map <unique> <silent> <F4> <ESC>:TagbarToggle<CR>
 
 map <unique> <silent> <F6> <ESC>:make!<CR>
 map <unique> <silent> <F7> <ESC>:Rgrep<CR>
@@ -591,9 +591,50 @@ let Tlist_Ctags_Cmd = "/data/nishome/tdsw1/haihua.liu/bin/ctags"
 let Tlist_Use_Right_Window = "1"
 let Tlist_GainFocus_On_ToggleOpen = 1
 set tags=tags;
-set csprg=/data/nishome/tdsw1/haihua.liu/bin/cscope
-set cscopequickfix=s-,c-,d-,i-,t-,e-
 "Set Tags "}}}
+
+" Set cscope "{{{
+if has("cscope")
+   set csprg=/data/nishome/tdsw1/haihua.liu/bin/cscope      " 指定用来执行cscope的命令
+   set csto=0                        " 设置cstag命令查找次序：0先找cscope数据库再找标签文件；1先找标签文件再找cscope数据库
+   set cst                            " 同时搜索cscope数据库和标签文件
+   set cscopequickfix=s-,c-,d-,i-,t-,e-    " 使用QuickFix窗口来显示cscope查找结果
+   set nocsverb
+"   if filereadable("cscope.out")    " 若当前目录下存在cscope数据库，添加该数据库到vim
+"       cs add cscope.out
+"   elseif $CSCOPE_DB != ""            " 否则只要环境变量CSCOPE_DB不为空，则添加其指定的数据库到vim
+"       cs add $CSCOPE_DB
+"   endif
+   set csverb
+endif
+map <F4> :cs add ./cscope.out .<CR> :cs reset<CR>
+imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
+" 将:cs find c等Cscope查找命令映射为<C-_>c等快捷键（按法是先按Ctrl+Shift+-, 然后很快再按下c）
+nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-_>i :cs find i <C-R>=expand("<cfile>")<CR><CR> :copen<CR><CR>
+
+" cscope的主要功能是通过其"find"子命令来实现的
+" "cscope find"的用法:
+" cs find c|d|e|f|g|i|s|t name
+" 0 或 s  查找这个 C 符号(可以跳过注释)
+" 1 或 g  查找这个定义
+" 2 或 d  查找这个函数调用的函数
+" 3 或 c  查找调用过这个函数的函数
+" 4 或 t  查找这个字符串
+" 6 或 e  查找这个 egrep 模式
+" 7 或 f  查找这个文件
+" 8 或 i  查找包含这个文件的文件
+" 用法：
+" <1>、为源码建立一个cscope数据库
+" lingd@ubuntu:~/arm/linux-2.6.28.7$ cscope -Rbq
+
+" Set cscope "}}}
 
 "----------------------
 "利用 插件 丰富 功能
