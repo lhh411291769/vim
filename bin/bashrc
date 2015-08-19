@@ -1,0 +1,70 @@
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+#if [ "$PS1" ]; then
+#  if [ "$BASH" ] && [ "$BASH" != "/bin/sh" ]; then
+#    # The file bash.bashrc already sets the default PS1.
+#    # PS1='\h:\w\$ '
+#    if [ -f /etc/bash.bashrc ]; then
+#      . /etc/bash.bashrc
+#    fi
+#  else
+#    if [ "`id -u`" -eq 0 ]; then
+#      PS1='# '
+#    else
+#      PS1='$ '
+#    fi
+#  fi
+#fi
+
+# The default umask is now handled by pam_umask.
+# See pam_umask(8) and /etc/login.defs.
+
+#if [ -d /etc/profile.d ]; then
+#  for i in /etc/profile.d/*.sh; do
+#    if [ -r $i ]; then
+#      . $i
+#    fi
+#  done
+#  unset i
+#fi
+
+# Set android env path
+
+JDK_PATH=/usr/jdk/bin
+JDK_LIB_PATH=/usr/jdk/lib
+
+# For future use
+JDK_NEW_PATH=/data/tools/jdk1.6.0_45/bin
+JDK_NEW_LIB_PATH=/data/tools/jdk1.6.0_45/lib
+
+# Only for test
+# SDK_PATH=/home/test/Downloads/android-sdk-linux_x86/tools
+# NDK_PATH=/home/test/Downloads/android-ndk
+# SDK_DEVTOOL_PATH=/home/test/Downloads/android-sdk-linux_x86/platform-tools
+
+
+ECLIPSE_PATH=/data/tools/adt-bundle-linux-x86_64-20140702/eclipse
+SDK_DEVTOOL_PATH=/data/tools/adt-bundle-linux-x86_64-20140702/sdk/platform-tools
+ADD_PATH=/data/tools/bin
+
+
+# for qualcomm tools
+export PREBUILTS_DOWN_SITE="sz"
+#/usr/bin/davmail /data/.davmail.properties &
+
+# BEGIN added by haihua.liu
+alias ls="ls --color"
+alias ll="ls -l"
+alias la="ls -la"
+alias grep="grep --color"
+export PATH="/data/nishome/tdsw1/haihua.liu/usr/local/bin:/data/tools/adt-bundle-linux-x86_64-20140702/sdk/platform-tools:/data/nishome/tdsw1/haihua.liu/bin:$PATH"
+# color varient
+c_green="\[\e[32m\]"
+c_red="\[\e[31m\]"
+c_yellow="\[\e[33m\]"
+c_clear="\[\e[0m\]"
+# config PS1
+PS1="$c_green\u$c_yellow@$c_green\h$c_red:$c_clear \w $c_yellow$ $c_clear"
+export LS_COLORS='no=00:fi=00:di=00;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;32:*.cmd=01;35:*.exe=01;35:*.com=01;35:*.btm=01;35:*.bat=01;35:*.sh=00;35:*.csh=01;35:*.tar=00;31:*.tgz=00;31:*.arj=01;31:*.taz=00;31:*.lzh=01;31:*.zip=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.bz=00;31:*.tz=00;31:*.rpm=00;31:*.cpio=00;31:*.jpg=00;35:*.gif=00;35:*.bmp=00;35:*.xbm=00;35:*.xpm=00;35:*.png=00;35:*.tif=01;35:'
+# END by haihua.liu
